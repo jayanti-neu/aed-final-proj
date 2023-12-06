@@ -22,11 +22,11 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
     RetailerEnterprise retailerEnterprise;
     UserAccount userAccount;
     Business business;
-    public RetailerOrderProductJPanel(RetailerEnterprise retailerEnterprise, JPanel workJpanel, UserAccount userAccount) {
+    public RetailerOrderProductJPanel(JPanel workJpanel, UserAccount userAccount) {
         initComponents();
         this.userAccount = userAccount;
-        this.retailerEnterprise = retailerEnterprise;
-        this.business = retailerEnterprise.getBusiness();
+//        this.retailerEnterprise = retailerEnterprise;
+//        this.business = retailerEnterprise.getBusiness();
         
     }
 

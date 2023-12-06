@@ -8,6 +8,7 @@ import business.Business.Business;
 import business.Enterprise.Enterprise;
 import business.Enterprise.RetailerEnterprise;
 import business.Organisation.Organisation;
+import business.Role.Role;
 import business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import ui.RetailerRole.RetailerOrderProductJPanel;
@@ -107,16 +108,20 @@ public class LoginScreen extends javax.swing.JPanel {
         // TODO add your handling code here:
         String username = jTextField1.getText();
         String password = jTextField2.getText();
-        
+        UserAccount userAccount = null;
         for (Enterprise enterprise : business.getEnterprisesInvolved()){
             for (Organisation org: enterprise.getOrganisationDirectory().getOrganisationList()){
                 for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()){
-                    
+                    if (username.equals(ua.getUsername()) && password.equals(ua.getPassword())){
+                        userAccount = ua;
+                        break;
+                    }
                 }
             }
         }
-        if(username.equals("retailer") && password.equals("234")){
-//            RetailerOrderProductJPanel ropj = new RetailerOrderProductJPanel(business.getRetailerEnterprise(), workAreaPanel);
+        if (userAccount != null){
+            Role role = userAccount.getRole();
+            role.openRolesWorkPage(workAreaPanel, userAccount);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 

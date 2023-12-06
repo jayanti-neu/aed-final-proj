@@ -22,6 +22,7 @@ public class Organisation {
     
     public Organisation(){
         userAccountDirectory = new UserAccountDirectory();
+        listOfRoles = new ArrayList<>();
     }
 
     public int getId() {
