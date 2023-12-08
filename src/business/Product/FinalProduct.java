@@ -14,7 +14,6 @@ public class FinalProduct {
     static int count = 0;
     
     public FinalProduct(){
-//        System.out.println("here");
         count++;
         id = count;
     }

@@ -29,9 +29,9 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
         initComponents();
         this.userAccount = userAccount;
         this.workJPanel = workJpanel;
-//        this.retailerEnterprise = retailerEnterprise;
 //        this.business = retailerEnterprise.getBusiness();
         this.business = Business.getInstance();
+        this.retailerEnterprise = this.business.getRetailerEnterprise();
     }
 
     /**

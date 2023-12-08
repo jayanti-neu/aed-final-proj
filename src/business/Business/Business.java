@@ -67,10 +67,12 @@ public class Business {
     }
     
     public RetailerEnterprise getRetailerEnterprise(){
-        return new RetailerEnterprise();
+//        return new RetailerEnterprise();
+        return (RetailerEnterprise)this.enterprisesInvolved.get(0);
     }
     
     public ManufacturingEnterprise getManufacturingEnterprise(){
-        return new ManufacturingEnterprise();
+        return (ManufacturingEnterprise)this.enterprisesInvolved.get(1);
+
     }
 }

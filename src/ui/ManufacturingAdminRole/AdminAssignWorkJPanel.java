@@ -49,12 +49,8 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
         DefaultTableModel requested = (DefaultTableModel) jTable1.getModel();
         jTable1.removeAll();
         for (WorkRequest wr: wq.getListOfRequests()){
-//            if (wr.getFromEnterprise().getClass()){
+            if (wr.getFromEnterprise().equals(this.business.getRetailerEnterprise())){
                 Object[] row = new Object[5];
-//                System.out.println(this.enterprise.findProduct(wr.getProductId()));
-//                System.out.println(this.enterprise.findProduct(wr.getProductId()).getName());
-                System.out.println(this.enterprise);
-                System.out.println(wr.getProductId());
                 row[0] = this.enterprise.findProduct(wr.getProductId());
                 row[1] = wr.getQuantity();
                 row[2] = this.enterprise.getInventory().get(wr.getProductId());
@@ -62,7 +58,7 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
                 row[4] = wr.getStatus();
                 
                 requested.addRow(row);
-//            }
+            }
         }
     }
     
