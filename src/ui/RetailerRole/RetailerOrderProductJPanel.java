@@ -8,6 +8,8 @@ import business.Business.Business;
 import business.Enterprise.RetailerEnterprise;
 import business.UserAccount.UserAccount;
 import business.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -22,12 +24,14 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
     RetailerEnterprise retailerEnterprise;
     UserAccount userAccount;
     Business business;
+    JPanel workJPanel;
     public RetailerOrderProductJPanel(JPanel workJpanel, UserAccount userAccount) {
         initComponents();
         this.userAccount = userAccount;
+        this.workJPanel = workJpanel;
 //        this.retailerEnterprise = retailerEnterprise;
 //        this.business = retailerEnterprise.getBusiness();
-        
+        this.business = Business.getInstance();
     }
 
     /**
@@ -44,6 +48,7 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         btnOrder.setText("Order");
         btnOrder.addActionListener(new java.awt.event.ActionListener() {
@@ -55,6 +60,13 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
         jLabel1.setText("Name:");
 
         jLabel2.setText("Quantity:");
+
+        jButton1.setText("< Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -75,11 +87,17 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
                             .addComponent(jTextField1)
                             .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))))
                 .addGap(191, 191, 191))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(377, 377, 377)
+                .addGap(282, 282, 282)
+                .addComponent(jButton1)
+                .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -99,15 +117,27 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
 //        business.Business.Business
         WorkRequest workRequest = business.getGlobalWorkQueue().addWorkRequest();
         workRequest.setStatus("Pending");
-        workRequest.setMessage("Please send product");
+        workRequest.setProductId(1);
+        workRequest.setQuantity(5);
+//        workRequest.requestForProduct();
         workRequest.setForEnterprise(business.getEnterprisesInvolved().get(1));
         workRequest.setFromEnterprise(userAccount.getOrganisation().getEnterprise());
         workRequest.setSender(userAccount);
+        JOptionPane.showMessageDialog(null, "Order sent");
+        
     }//GEN-LAST:event_btnOrderActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout) this.workJPanel.getLayout();
+        this.workJPanel.remove(this);
+        layout.previous(this.workJPanel);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOrder;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;

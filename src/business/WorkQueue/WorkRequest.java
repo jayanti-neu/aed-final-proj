@@ -7,6 +7,7 @@ package business.WorkQueue;
 import business.Enterprise.Enterprise;
 import business.Organisation.Organisation;
 import business.UserAccount.UserAccount;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -17,9 +18,37 @@ public class WorkRequest {
     UserAccount assigned;
     
     String status;
-    String message;
     Enterprise forEnterprise;
     Enterprise fromEnterprise;
+    
+    int productId;
+    int quantity;
+    
+    LocalDateTime dateOfRequest;
+
+    public LocalDateTime getDateOfRequest() {
+        return dateOfRequest;
+    }
+    
+    public WorkRequest(){
+        dateOfRequest = LocalDateTime.now();
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     public UserAccount getSender() {
         return sender;
@@ -43,14 +72,6 @@ public class WorkRequest {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public Enterprise getForEnterprise() {

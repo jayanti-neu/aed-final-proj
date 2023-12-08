@@ -16,20 +16,20 @@ import java.util.ArrayList;
 public class Business {
     String name;
     static Business business;
-//    ArrayList<GlobalWorkQueue> workRequestList; //productTrackList
     WorkQueue globalWorkQueue;
     ArrayList<Enterprise> enterprisesInvolved;
     
     public Business(){
-//        workRequestList = new ArrayList<>();
         globalWorkQueue = new WorkQueue();
         enterprisesInvolved = new ArrayList<>();
     }
     
     public static Business getInstance(){
+        
         if (business == null){
             business = new Business();
-        }
+        } 
+        
         return business;
     }
 
