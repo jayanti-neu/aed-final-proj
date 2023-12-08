@@ -31,18 +31,15 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
     Business business;
     WorkQueue wq;
     ManufacturingEnterprise enterprise;
-    Organisation organisation;
+//    ManufactureOrganisation organisation;
     
-    enum Status {Pending, Processing, Packaging, Finished, Sent};
     public AdminAssignWorkJPanel(JPanel workJPanel, UserAccount userAccount) {
         initComponents();
         this.workJPanel = workJPanel;
         this.userAccount = userAccount;
         this.business = Business.getInstance();
         this.wq = this.business.getGlobalWorkQueue();
-        this.organisation = userAccount.getOrganisation();
-//        this.enterprise = (ManufacturingEnterprise) this.organisation.getEnterprise();
-        
+        this.enterprise = business.getManufacturingEnterprise();
         populateTable();
         addEventListener();
 
@@ -52,14 +49,15 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
         DefaultTableModel requested = (DefaultTableModel) jTable1.getModel();
         jTable1.removeAll();
         for (WorkRequest wr: wq.getListOfRequests()){
-            System.out.println("comes here");
-            System.out.println(wr.getForEnterprise());
-            System.out.println(this.enterprise);
 //            if (wr.getFromEnterprise().getClass()){
                 Object[] row = new Object[5];
-                row[0] = wr.getProductId();
+//                System.out.println(this.enterprise.findProduct(wr.getProductId()));
+//                System.out.println(this.enterprise.findProduct(wr.getProductId()).getName());
+                System.out.println(this.enterprise);
+                System.out.println(wr.getProductId());
+                row[0] = this.enterprise.findProduct(wr.getProductId());
                 row[1] = wr.getQuantity();
-                row[2] = userAccount.getOrganisation().getEnterprise().   getInventory().get(wr.getProductId());
+                row[2] = this.enterprise.getInventory().get(wr.getProductId());
                 row[3] = wr.getDateOfRequest();
                 row[4] = wr.getStatus();
                 

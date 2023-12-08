@@ -36,6 +36,17 @@ public class ManufacturingEnterprise extends Enterprise{
         createRecipes();
     }
     
+    public FinalProduct findProduct(int id){
+        for (FinalProduct fp: finalProductList){
+            System.out.println(fp);
+            System.out.println(fp.getId());
+            if (fp.getId() == id){
+                return fp;
+            }
+        }
+        return null;
+    }
+    
     public void createFinalProductList(){
         FinalProduct fp1 = new FinalProduct();
         fp1.setName("fp1");
@@ -59,7 +70,7 @@ public class ManufacturingEnterprise extends Enterprise{
         rp2.setName("rp2");
         rawProductList.add(rp2);
         RawProduct rp3 = new RawProduct();
-        rp3.setName("fp13");
+        rp3.setName("rp3");
         rawProductList.add(rp3);
     }
     

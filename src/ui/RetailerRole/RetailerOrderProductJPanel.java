@@ -113,18 +113,14 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         // TODO add your handling code here:
-        
-//        business.Business.Business
         WorkRequest workRequest = business.getGlobalWorkQueue().addWorkRequest();
         workRequest.setStatus("Pending");
         workRequest.setProductId(1);
         workRequest.setQuantity(5);
-//        workRequest.requestForProduct();
-        workRequest.setForEnterprise(business.getEnterprisesInvolved().get(1));
-        workRequest.setFromEnterprise(userAccount.getOrganisation().getEnterprise());
         workRequest.setSender(userAccount);
+        workRequest.setFromEnterprise(retailerEnterprise);
         JOptionPane.showMessageDialog(null, "Order sent");
-        
+
     }//GEN-LAST:event_btnOrderActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
