@@ -15,8 +15,12 @@ public class SupplierSupplyProductJPanel extends javax.swing.JPanel {
      */
     public SupplierSupplyProductJPanel() {
         initComponents();
+        populateTable();
     }
 
+    public void populateTable(){
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,6 +35,11 @@ public class SupplierSupplyProductJPanel extends javax.swing.JPanel {
         jTable2 = new javax.swing.JTable();
 
         jButton1.setText("Process");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,6 +82,11 @@ public class SupplierSupplyProductJPanel extends javax.swing.JPanel {
                 .addContainerGap(344, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

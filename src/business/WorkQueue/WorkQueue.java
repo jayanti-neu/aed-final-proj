@@ -30,4 +30,13 @@ public class WorkQueue {
         listOfRequests.add(wr);
         return wr;
     }
+    
+    public WorkRequest findWorkRequest(int id){
+        for (WorkRequest wr : listOfRequests){
+            if (wr.getId() == id){
+                return wr;
+            }
+        }
+        return null;
+    }
 }

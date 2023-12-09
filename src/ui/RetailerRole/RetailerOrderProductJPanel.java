@@ -151,7 +151,7 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
         int productId = Integer.valueOf(jTextField1.getText());
         int quantityRequested = Integer.valueOf(jTextField2.getText());
         this.currentWorkRequest = business.getGlobalWorkQueue().addWorkRequest();
-        currentWorkRequest.setStatus("Requested Product");
+        currentWorkRequest.setStatus("Requested Product from Manufacturer");
         currentWorkRequest.setProductId(productId);
         currentWorkRequest.setQuantity(quantityRequested);
         currentWorkRequest.setSender(userAccount);

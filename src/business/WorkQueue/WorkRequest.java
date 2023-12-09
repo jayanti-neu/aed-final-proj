@@ -25,15 +25,38 @@ public class WorkRequest {
     int quantity;
     
     LocalDateTime dateOfRequest;
+    static int count = 0;
+    int id; 
+    int waitingForId;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getWaitingForId() {
+        return waitingForId;
+    }
+
+    public void setWaitingForId(int waitingForId) {
+        this.waitingForId = waitingForId;
+    }
+    
+    
+    public WorkRequest(){
+        count++;
+        id = count;
+        dateOfRequest = LocalDateTime.now();
+        waitingForId = -1;
+    }
 
     public LocalDateTime getDateOfRequest() {
         return dateOfRequest;
     }
     
-    public WorkRequest(){
-        dateOfRequest = LocalDateTime.now();
-    }
-
     public int getProductId() {
         return productId;
     }
