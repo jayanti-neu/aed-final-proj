@@ -4,6 +4,9 @@
  */
 package ui.SupplierRole;
 
+import business.Business.Business;
+import business.WorkQueue.WorkRequest;
+
 /**
  *
  * @author jayanti
@@ -13,9 +16,26 @@ public class SupplierSupplyProductJPanel extends javax.swing.JPanel {
     /**
      * Creates new form SupplierSupplyProductJPanel
      */
+    
+    Business business;
+    
     public SupplierSupplyProductJPanel() {
+        this.business = Business.getInstance();
         initComponents();
         populateTable();
+    }
+    
+        public void populateTable(){
+        jTable2.removeAll();
+        for(WorkRequest wr : this.business.getGlobalWorkQueue().getListOfRequests()){
+            if (wr.getFromEnterprise().equals(this.business.getRetailerEnterprise())){
+                Object row[] = new Object[4];
+                row[0] = wr.getProductId();
+                row[1] = wr.getQuantity();
+                row[2] = wr.getDateOfRequest();
+                row[3] = wr.getStatus();
+            }
+        }
     }
 
     public void populateTable(){
