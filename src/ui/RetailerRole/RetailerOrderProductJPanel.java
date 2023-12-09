@@ -11,6 +11,7 @@ import business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -157,14 +158,16 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
         currentWorkRequest.setSender(userAccount);
         currentWorkRequest.setFromEnterprise(retailerEnterprise);
         currentWorkRequest.setForEnterprise(this.business.getManufacturingEnterprise());
+        populateTable();
         JOptionPane.showMessageDialog(null, "Order sent");
         
-        populateTable();
 
     }//GEN-LAST:event_btnOrderActionPerformed
 
     public void populateTable(){
         jTable2.removeAll();
+        System.out.println("here");
+        DefaultTableModel table1 = (DefaultTableModel)jTable2.getModel();
         for(WorkRequest wr : this.business.getGlobalWorkQueue().getListOfRequests()){
             if (wr.getFromEnterprise().equals(this.business.getRetailerEnterprise())){
                 Object row[] = new Object[4];
@@ -172,6 +175,8 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
                 row[1] = wr.getQuantity();
                 row[2] = wr.getDateOfRequest();
                 row[3] = wr.getStatus();
+                table1.addRow(row);
+                
             }
         }
     }

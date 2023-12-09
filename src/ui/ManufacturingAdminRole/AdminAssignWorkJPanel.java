@@ -12,6 +12,7 @@ import business.Product.FinalProduct;
 import business.UserAccount.UserAccount;
 import business.WorkQueue.WorkQueue;
 import business.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
@@ -45,35 +46,41 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
         populateTable();
         addEventListener();
         jButton4.setVisible(false);
-        updateIncomingRequestTable();
+    }
+    
+    public void updateInventory(){
+        
     }
     
     public void updateIncomingRequestTable(){
-       DefaultTableModel requested = (DefaultTableModel) jTable1.getModel();
-        jTable1.removeAll();
+       DefaultTableModel requested = (DefaultTableModel) jTable2.getModel();
+        requested.setRowCount(0);
         for (WorkRequest wr: wq.getListOfRequests()){
             if (wr.getFromEnterprise().equals(this.business.getRetailerEnterprise())){
-                int waitingforid = this.business.getGlobalWorkQueue().findWorkRequest(wr.getWaitingForId()).getWaitingForId();
+                int waitingforid = wr.getWaitingForId();
                 String status = this.business.getGlobalWorkQueue().findWorkRequest(waitingforid).getStatus(); 
-                if (status == "approved"){
-                    
+                if ("Approved".equals(status)){
+                    wr.setStatus(status);
+                    int quantityInInventory = this.enterprise.getInventory().get(wr.getProductId());
+                    this.enterprise.getInventory().put(wr.getProductId(),quantityInInventory + wr.getQuantity());
+                    JOptionPane.showMessageDialog(null, "The product has been approved with more quantity");
+                    populateTable();
                 }
             }
         } 
     }
     public void populateTable(){
+                jTable2.removeAll();
         DefaultTableModel requested = (DefaultTableModel) jTable2.getModel();
-        jTable2.removeAll();
         for (WorkRequest wr: wq.getListOfRequests()){
             if (wr.getFromEnterprise().equals(this.business.getRetailerEnterprise())){
-                Object[] row = new Object[5];
+                Object[] row = new Object[6];
                 row[0] = wr.getId();
                 row[1] = this.enterprise.findProduct(wr.getProductId());
                 row[2] = wr.getQuantity();
                 row[3] = this.enterprise.getInventory().get(wr.getProductId());
                 row[4] = wr.getDateOfRequest();
                 row[5] = wr.getStatus();
-//                wr.setWaitingForId(ABORT);
                 requested.addRow(row);
             }
         }
@@ -89,13 +96,14 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
                         int selectedRow = jTable2.getSelectedRow();
                         if (selectedRow != -1) {
                             jButton4.setVisible(true);
-                            int requiredQuantity = (int)jTable2.getValueAt(selectedRow, 1);
-                            int availableQuantity = (int)jTable2.getValueAt(selectedRow, 2);
+                            int requiredQuantity = (int)jTable2.getValueAt(selectedRow, 2);
+                            int availableQuantity = (int)jTable2.getValueAt(selectedRow, 3);
                             if (requiredQuantity <= availableQuantity){
-                                JOptionPane.showMessageDialog(null, "Congratulations work request can be successfully completed");
                                 jButton4.setText("Complete Work Request");
+                                JOptionPane.showMessageDialog(null, "Congratulations work request can be successfully completed");
+                                
                             } else {
-                                jButton4.setText("Send for processing the required quantity");
+                                jButton4.setText("Send for processing more");
                             }
                         }
                     }
@@ -104,6 +112,7 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
     }
     
     public int createNewWorkRequest(FinalProduct fp, int amt){
+        
         WorkRequest wr = this.business.getGlobalWorkQueue().addWorkRequest();
         wr.setQuantity(amt);
         wr.setFromEnterprise(enterprise);
@@ -131,6 +140,7 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
         jTable2 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Incoming Requests");
@@ -210,6 +220,13 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton3.setText("<Back");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -225,7 +242,10 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jButton4))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -243,7 +263,9 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
                     .addComponent(jButton4)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -263,6 +285,7 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
             System.out.println("nothing is selected");
         } else {
             System.out.println(selectedRow);
+            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -271,14 +294,21 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
         int selectedRow = jTable2.getSelectedRow();
         int workRequestId = (int)jTable2.getValueAt(selectedRow, 0);
         WorkRequest wr = this.business.getGlobalWorkQueue().findWorkRequest(workRequestId);
-        wr.getWaitingForId();
-        int requiredQuantity = (int)jTable2.getValueAt(selectedRow, 1);
-        int availableQuantity = (int)jTable2.getValueAt(selectedRow, 2);
+//        wr.getWaitingForId();
+        int requiredQuantity = (int)jTable2.getValueAt(selectedRow, 2);
+        int availableQuantity = (int)jTable2.getValueAt(selectedRow, 3);
         int amtSendForProcessing = requiredQuantity - availableQuantity;
+        if (amtSendForProcessing < 0){
+            wr.setWaitingForId(-1);
+            wr.setStatus("Approved");
+            int quantityInInventory = this.enterprise.getInventory().get(wr.getProductId());
+            this.enterprise.getInventory().put(wr.getProductId(),quantityInInventory - wr.getQuantity());
+
+        }
 
         JOptionPane.showMessageDialog(null, "Sending for processing amount: " + amtSendForProcessing);
-        createNewWorkRequest((FinalProduct)jTable1.getValueAt(selectedRow, 0), amtSendForProcessing);
-
+        int waitingid = createNewWorkRequest((FinalProduct)jTable2.getValueAt(selectedRow, 1), amtSendForProcessing);
+        wr.setWaitingForId(waitingid);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -286,10 +316,18 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
         updateIncomingRequestTable();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout) this.workJPanel.getLayout();
+        this.workJPanel.remove(this);
+        layout.previous(this.workJPanel);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -25,7 +25,7 @@ public class WorkRequest {
     int quantity;
     
     LocalDateTime dateOfRequest;
-    static int count = 0;
+        static int count = 0;
     int id; 
     int waitingForId;
 
@@ -56,7 +56,7 @@ public class WorkRequest {
     public LocalDateTime getDateOfRequest() {
         return dateOfRequest;
     }
-    
+
     public int getProductId() {
         return productId;
     }

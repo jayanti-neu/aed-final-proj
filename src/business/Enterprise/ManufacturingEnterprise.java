@@ -38,8 +38,6 @@ public class ManufacturingEnterprise extends Enterprise{
     
     public FinalProduct findProduct(int id){
         for (FinalProduct fp: finalProductList){
-            System.out.println(fp);
-            System.out.println(fp.getId());
             if (fp.getId() == id){
                 return fp;
             }

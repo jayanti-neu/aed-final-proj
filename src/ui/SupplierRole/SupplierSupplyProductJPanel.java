@@ -5,7 +5,11 @@
 package ui.SupplierRole;
 
 import business.Business.Business;
+import business.UserAccount.UserAccount;
 import business.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,28 +22,30 @@ public class SupplierSupplyProductJPanel extends javax.swing.JPanel {
      */
     
     Business business;
-    
-    public SupplierSupplyProductJPanel() {
+    JPanel workJPanel;
+
+    public SupplierSupplyProductJPanel(JPanel workAreaPanel, UserAccount userAccount) {
         this.business = Business.getInstance();
+        this.workJPanel = workAreaPanel;
         initComponents();
-        populateTable();
+        populateTable();    
     }
     
         public void populateTable(){
         jTable2.removeAll();
+        DefaultTableModel table1 = (DefaultTableModel)jTable2.getModel();
         for(WorkRequest wr : this.business.getGlobalWorkQueue().getListOfRequests()){
-            if (wr.getFromEnterprise().equals(this.business.getRetailerEnterprise())){
-                Object row[] = new Object[4];
-                row[0] = wr.getProductId();
-                row[1] = wr.getQuantity();
-                row[2] = wr.getDateOfRequest();
-                row[3] = wr.getStatus();
+            System.out.println("-----wr----"+wr);
+            if (wr.getFromEnterprise().equals(this.business.getManufacturingEnterprise())){
+                Object row[] = new Object[5];
+                row[0] = wr.getId();
+                row[1] = wr.getProductId();
+                row[2] = wr.getQuantity();
+                row[3] = wr.getDateOfRequest();
+                row[4] = wr.getStatus();
+                table1.addRow(row);
             }
         }
-    }
-
-    public void populateTable(){
-        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,6 +59,7 @@ public class SupplierSupplyProductJPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
 
         jButton1.setText("Process");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -66,11 +73,11 @@ public class SupplierSupplyProductJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Requested Final Product", "Requested Quantity", "Date of Request", "Status"
+                "WorkRequestId", "Requested Final Product", "Requested Quantity", "Date of Request", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -78,18 +85,36 @@ public class SupplierSupplyProductJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane2.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setResizable(false);
+            jTable2.getColumnModel().getColumn(1).setResizable(false);
+            jTable2.getColumnModel().getColumn(2).setResizable(false);
+            jTable2.getColumnModel().getColumn(3).setResizable(false);
+            jTable2.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        jButton3.setText("<Back");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
-                        .addGap(0, 516, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE))
+                        .addGap(41, 41, 41)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -97,21 +122,35 @@ public class SupplierSupplyProductJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
-                .addComponent(jButton1)
-                .addContainerGap(344, Short.MAX_VALUE))
+                .addGap(73, 73, 73)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton3))
+                .addContainerGap(341, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+        WorkRequest wr = this.business.getGlobalWorkQueue().findWorkRequest((int)jTable2.getValueAt(jTable2.getSelectedRow(), 0));
+        wr.setStatus("Approved");
+        int reqQty = wr.getQuantity();
+        wr.setQuantity(reqQty + 5);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout) this.workJPanel.getLayout();
+        this.workJPanel.remove(this);
+        layout.previous(this.workJPanel);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
+
 }

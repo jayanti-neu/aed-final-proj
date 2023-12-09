@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import ui.ManufacturingAdminRole.AdminAssignWorkJPanel;
 import ui.ManufacturingProcessorRole.ProcessorProcessProductJPanel;
 import ui.RetailerRole.RetailerOrderProductJPanel;
+import ui.SupplierRole.SupplierSupplyProductJPanel;
 
 /**
  *
@@ -31,6 +32,11 @@ public class Role {
             AdminAssignWorkJPanel aawjp = new AdminAssignWorkJPanel(workAreaPanel, userAccount);
             CardLayout layout = (CardLayout) workAreaPanel.getLayout();
             workAreaPanel.add("AdminAssignWorkJPanel", aawjp);
+            layout.next(workAreaPanel);
+        } else if (this instanceof SupplierRole) {
+            SupplierSupplyProductJPanel swjp = new SupplierSupplyProductJPanel(workAreaPanel, userAccount);
+            CardLayout layout = (CardLayout) workAreaPanel.getLayout();
+            workAreaPanel.add("SupplierSupplyProductJPanel", swjp);
             layout.next(workAreaPanel);
         }
     }

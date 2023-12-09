@@ -3,27 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/business/Product/RawProduct.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/business/Role/RetailerRole.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/business/Organisation/ManufactureAdminOrganisation.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/business/Organisation/RetailerOrganisation.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/ui/ManufacturingProcessorRole/ProcessorProcessProductJPanel.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/business/UserAccount/UserAccount.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/business/Enterprise/ManufacturingEnterprise.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/business/Organisation/Organisation.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/business/Role/Role.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/ui/MainFrame.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/ui/LoginScreen.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/business/Role/ManufactureAdminRole.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/business/Enterprise/RetailerEnterprise.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/business/Role/ManufactureProcessorRole.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/business/Product/Inventory.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/business/Business/ConfigueBusiness.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/business/Enterprise/Enterprise.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/business/Product/Recipe.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/business/Product/FinalProduct.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/ui/RetailerRole/RetailerOrderProductJPanel.java</file>
-            <file>file:/C:/Users/girija/Documents/assignments-neu/aed/homework-assignments/aed-final-project/TestSCM/src/ui/ManufacturingAdminRole/AdminAssignWorkJPanel.java</file>
+            <file>file:/Users/eesitasen/NetBeansProjects/aed-final-proj/src/ui/RetailerRole/RetailerOrderProductJPanel.java</file>
+            <file>file:/Users/eesitasen/NetBeansProjects/aed-final-proj/src/ui/SupplierRole/SupplierSupplyProductJPanel.java</file>
+            <file>file:/Users/eesitasen/NetBeansProjects/aed-final-proj/src/ui/ManufacturingAdminRole/AdminAssignWorkJPanel.java</file>
         </group>
     </open-files>
 </project-private>
