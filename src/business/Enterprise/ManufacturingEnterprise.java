@@ -9,6 +9,7 @@ import business.Organisation.ManufacturePackerOrganisation;
 import business.Organisation.ManufactureProcessorOrganisation;
 import business.Product.FinalProduct;
 import business.Product.RawProduct;
+import business.Product.Recipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +22,7 @@ public class ManufacturingEnterprise extends Enterprise{
     ArrayList<FinalProduct> finalProductList;
     Map<Integer, Integer> inventory; //productId, quantity
     Map<Integer, ArrayList<Integer>> recipe; //finalProductId, listOfRawProductsNeededToMakeRawProduct
+//    ArrayList<Recipe>
     ArrayList<RawProduct> rawProductList;
     
     public ManufacturingEnterprise(){
@@ -32,8 +34,6 @@ public class ManufacturingEnterprise extends Enterprise{
         inventory = new HashMap<>();
         recipe = new HashMap<>();
         createFinalProductList();
-        createRawProductList();
-        createRecipes();
     }
     
     public FinalProduct findProduct(int id){
@@ -50,48 +50,48 @@ public class ManufacturingEnterprise extends Enterprise{
     public void createFinalProductList(){
         FinalProduct fp1 = new FinalProduct();
         fp1.setName("fp1");
+//        recipe 1
+        Recipe r1 = new Recipe();
+        r1.setQuantity(5);
+//        raw product 1
+        RawProduct rp1 = new RawProduct();
+        rp1.setName("rp1");
+        
+        r1.setRawProductId(rp1.getId());
+//        recipe 2
+        Recipe r2 = new Recipe();
+        r2.setQuantity(14);
+//        raw product 2
+        RawProduct rp2 = new RawProduct();
+        rp2.setName("rp2");
+        r2.setRawProductId(rp2.getId());
+        
+        fp1.getRecipeList().add(r1);
+        fp1.getRecipeList().add(r2);
         finalProductList.add(fp1);
         inventory.put(fp1.getId(), 10);
+//   -------------------------------------------
         FinalProduct fp2 = new FinalProduct();
         fp2.setName("fp2");
+//        recipe 3
+        Recipe r3 = new Recipe();
+        r3.setQuantity(10);
+        r3.setRawProductId(rp2.getId());
+        
+        fp2.getRecipeList().add(r3);  
         finalProductList.add(fp2);
         inventory.put(fp2.getId(), 20);
+
+//   ----------------------------------------------     
         FinalProduct fp3 = new FinalProduct();
+        Recipe r4 = new Recipe();
+        r4.setRawProductId(rp1.getId());
+        r4.setQuantity(14);
+        fp3.getRecipeList().add(r4);
         fp3.setName("fp13");
         finalProductList.add(fp3);
         inventory.put(fp3.getId(), 30);
     }
-    
-    public void createRawProductList(){
-        RawProduct rp1 = new RawProduct();
-        rp1.setName("rp1");
-        rawProductList.add(rp1);
-        RawProduct rp2 = new RawProduct();
-        rp2.setName("rp2");
-        rawProductList.add(rp2);
-        RawProduct rp3 = new RawProduct();
-        rp3.setName("rp3");
-        rawProductList.add(rp3);
-    }
-    
-    public void createRecipes(){
-        ArrayList<Integer> rawIngredients = new ArrayList<>();
-        rawIngredients.add(1);
-        rawIngredients.add(2);
-        recipe.put(1, rawIngredients);
-        
-        ArrayList<Integer> rawIngredients2 = new ArrayList<>();
-        rawIngredients2.add(2);
-        rawIngredients2.add(3);
-        recipe.put(2, rawIngredients2);
-        
-        ArrayList<Integer> rawIngredients3 = new ArrayList<>();
-        rawIngredients3.add(1);
-        rawIngredients3.add(3);
-        recipe.put(3, rawIngredients3);
-        
-    }
-    
     
     public ArrayList<FinalProduct> getFinalProductList() {
         return finalProductList;

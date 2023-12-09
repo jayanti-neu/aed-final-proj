@@ -9,7 +9,24 @@ package business.Product;
  * @author jayanti
  */
 public class Recipe {
-    int finalProductId;
     int rawProductId;
     int quantity;
+
+    public int getRawProductId() {
+        return rawProductId;
+    }
+
+    public void setRawProductId(int rawProductId) {
+        this.rawProductId = rawProductId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    
+    
 }

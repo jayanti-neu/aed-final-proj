@@ -7,6 +7,7 @@ package business.Business;
 import business.Enterprise.Enterprise;
 import business.Enterprise.ManufacturingEnterprise;
 import business.Enterprise.RetailerEnterprise;
+import business.Enterprise.SupplierEnterprise;
 import business.WorkQueue.WorkQueue;
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ public class Business {
     static Business business;
     WorkQueue globalWorkQueue;
     ArrayList<Enterprise> enterprisesInvolved;
+//    ArrayLi
     
     public Business(){
         globalWorkQueue = new WorkQueue();
@@ -67,12 +69,15 @@ public class Business {
     }
     
     public RetailerEnterprise getRetailerEnterprise(){
-//        return new RetailerEnterprise();
         return (RetailerEnterprise)this.enterprisesInvolved.get(0);
     }
     
     public ManufacturingEnterprise getManufacturingEnterprise(){
         return (ManufacturingEnterprise)this.enterprisesInvolved.get(1);
 
+    }
+    
+    public SupplierEnterprise getSupplierEnterprise(){
+        return (SupplierEnterprise) this.enterprisesInvolved.get(2);
     }
 }

@@ -25,6 +25,7 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
     UserAccount userAccount;
     Business business;
     JPanel workJPanel;
+    WorkRequest currentWorkRequest;
     public RetailerOrderProductJPanel(JPanel workJpanel, UserAccount userAccount) {
         initComponents();
         this.userAccount = userAccount;
@@ -32,6 +33,7 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
 //        this.business = retailerEnterprise.getBusiness();
         this.business = Business.getInstance();
         this.retailerEnterprise = this.business.getRetailerEnterprise();
+        populateTable();
     }
 
     /**
@@ -49,6 +51,9 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
 
         btnOrder.setText("Order");
         btnOrder.addActionListener(new java.awt.event.ActionListener() {
@@ -68,61 +73,108 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
             }
         });
 
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Requested Final Product", "Requested Quantity", "Date of Request", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Orders Placed");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnOrder))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(297, 297, 297)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(239, 239, 239)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                            .addComponent(jTextField2))))
                 .addGap(191, 191, 191))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(282, 282, 282)
-                .addComponent(jButton1)
-                .addGap(73, 73, 73)
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addGap(39, 39, 39)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(181, 181, 181)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(btnOrder)
-                .addGap(152, 152, 152))
+                .addGap(76, 76, 76)
+                .addComponent(jButton1)
+                .addGap(54, 54, 54))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         // TODO add your handling code here:
-        WorkRequest workRequest = business.getGlobalWorkQueue().addWorkRequest();
-        workRequest.setStatus("Pending");
-        workRequest.setProductId(1);
-        workRequest.setQuantity(5);
-        workRequest.setSender(userAccount);
-        workRequest.setFromEnterprise(retailerEnterprise);
+        int productId = Integer.valueOf(jTextField1.getText());
+        int quantityRequested = Integer.valueOf(jTextField2.getText());
+        this.currentWorkRequest = business.getGlobalWorkQueue().addWorkRequest();
+        currentWorkRequest.setStatus("Requested Product");
+        currentWorkRequest.setProductId(productId);
+        currentWorkRequest.setQuantity(quantityRequested);
+        currentWorkRequest.setSender(userAccount);
+        currentWorkRequest.setFromEnterprise(retailerEnterprise);
+        currentWorkRequest.setForEnterprise(this.business.getManufacturingEnterprise());
         JOptionPane.showMessageDialog(null, "Order sent");
+        
+        populateTable();
 
     }//GEN-LAST:event_btnOrderActionPerformed
 
+    public void populateTable(){
+        jTable2.removeAll();
+        for(WorkRequest wr : this.business.getGlobalWorkQueue().getListOfRequests()){
+            if (wr.getFromEnterprise().equals(this.business.getRetailerEnterprise())){
+                Object row[] = new Object[4];
+                row[0] = wr.getProductId();
+                row[1] = wr.getQuantity();
+                row[2] = wr.getDateOfRequest();
+                row[3] = wr.getStatus();
+            }
+        }
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         CardLayout layout = (CardLayout) this.workJPanel.getLayout();
@@ -136,6 +188,9 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables

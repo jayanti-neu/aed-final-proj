@@ -6,6 +6,7 @@ package business.Business;
 
 import business.Enterprise.ManufacturingEnterprise;
 import business.Enterprise.RetailerEnterprise;
+import business.Enterprise.SupplierEnterprise;
 
 /**
  *
@@ -17,10 +18,10 @@ public class ConfigueBusiness {
         Business business = Business.getInstance();
         RetailerEnterprise retailerEnterprise = new RetailerEnterprise();
         ManufacturingEnterprise manufacturingEnterprise = new ManufacturingEnterprise();
+        SupplierEnterprise supplierEnterprise = new SupplierEnterprise();
         business.getEnterprisesInvolved().add(retailerEnterprise);
         business.getEnterprisesInvolved().add(manufacturingEnterprise);
-
-//        business.getRetailerEnterprise();
+        business.getEnterprisesInvolved().add(supplierEnterprise);
         return business;
     }
     
