@@ -4,6 +4,9 @@
  */
 package ui.SupplierRole;
 
+import business.Business.Business;
+import business.WorkQueue.WorkRequest;
+
 /**
  *
  * @author jayanti
@@ -13,8 +16,25 @@ public class SupplierSupplyProductJPanel extends javax.swing.JPanel {
     /**
      * Creates new form SupplierSupplyProductJPanel
      */
+    
+    Business business;
+    
     public SupplierSupplyProductJPanel() {
+        this.business = Business.getInstance();
         initComponents();
+    }
+    
+        public void populateTable(){
+        jTable2.removeAll();
+        for(WorkRequest wr : this.business.getGlobalWorkQueue().getListOfRequests()){
+            if (wr.getFromEnterprise().equals(this.business.getRetailerEnterprise())){
+                Object row[] = new Object[4];
+                row[0] = wr.getProductId();
+                row[1] = wr.getQuantity();
+                row[2] = wr.getDateOfRequest();
+                row[3] = wr.getStatus();
+            }
+        }
     }
 
     /**
@@ -31,6 +51,11 @@ public class SupplierSupplyProductJPanel extends javax.swing.JPanel {
         jTable2 = new javax.swing.JTable();
 
         jButton1.setText("Process");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,6 +98,11 @@ public class SupplierSupplyProductJPanel extends javax.swing.JPanel {
                 .addContainerGap(344, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
