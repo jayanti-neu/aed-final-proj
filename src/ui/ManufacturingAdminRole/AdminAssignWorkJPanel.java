@@ -58,11 +58,12 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
         for (WorkRequest wr: wq.getListOfRequests()){
             if (wr.getFromEnterprise().equals(this.business.getRetailerEnterprise())){
                 int waitingforid = wr.getWaitingForId();
-                String status = this.business.getGlobalWorkQueue().findWorkRequest(waitingforid).getStatus(); 
+                WorkRequest wrWaiting = this.business.getGlobalWorkQueue().findWorkRequest(waitingforid);
+                String status = wrWaiting.getStatus(); 
                 if ("Approved".equals(status)){
                     wr.setStatus(status);
                     int quantityInInventory = this.enterprise.getInventory().get(wr.getProductId());
-                    this.enterprise.getInventory().put(wr.getProductId(),quantityInInventory + wr.getQuantity());
+                    this.enterprise.getInventory().put(wr.getProductId(),quantityInInventory + wrWaiting.getQuantity());
                     JOptionPane.showMessageDialog(null, "The product has been approved with more quantity");
                     populateTable();
                 }
@@ -304,11 +305,11 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
             int quantityInInventory = this.enterprise.getInventory().get(wr.getProductId());
             this.enterprise.getInventory().put(wr.getProductId(),quantityInInventory - wr.getQuantity());
 
+        } else {
+            JOptionPane.showMessageDialog(null, "Sending for processing amount: " + amtSendForProcessing);
+            int waitingid = createNewWorkRequest((FinalProduct)jTable2.getValueAt(selectedRow, 1), amtSendForProcessing);
+            wr.setWaitingForId(waitingid);    
         }
-
-        JOptionPane.showMessageDialog(null, "Sending for processing amount: " + amtSendForProcessing);
-        int waitingid = createNewWorkRequest((FinalProduct)jTable2.getValueAt(selectedRow, 1), amtSendForProcessing);
-        wr.setWaitingForId(waitingid);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

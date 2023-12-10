@@ -18,7 +18,7 @@ public class SupplierOrganisation extends Organisation{
     }
     public void addRoles(){
         getListOfRoles().add(new SupplierRole());
-    }
+    } 
     public void addUserAccount(){
         UserAccount user = this.getUserAccountDirectory().addUserAccount();
         user.setUsername("supplier");

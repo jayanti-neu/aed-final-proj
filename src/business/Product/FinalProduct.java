@@ -14,21 +14,12 @@ public class FinalProduct {
     int id;
     String name;
     static int count = 0;
-    ArrayList<Recipe> recipeList;
-
-    public ArrayList<Recipe> getRecipeList() {
-        return recipeList;
-    }
-
-    public void setRecipeList(ArrayList<Recipe> recipeList) {
-        this.recipeList = recipeList;
-    }
+    Recipe recipeForProduct;
     
     
     public FinalProduct(){
         count++;
         id = count;
-        recipeList = new ArrayList<>();
     }
 
     public int getId() {

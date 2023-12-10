@@ -8,6 +8,7 @@ import business.Enterprise.Enterprise;
 import business.Enterprise.ManufacturingEnterprise;
 import business.Enterprise.RetailerEnterprise;
 import business.Enterprise.SupplierEnterprise;
+import business.Product.FinalProduct;
 import business.WorkQueue.WorkQueue;
 import java.util.ArrayList;
 
@@ -20,6 +21,7 @@ public class Business {
     static Business business;
     WorkQueue globalWorkQueue;
     ArrayList<Enterprise> enterprisesInvolved;
+    ArrayList<FinalProduct> productsSoldByBusiness;
 //    ArrayLi
     
     public Business(){

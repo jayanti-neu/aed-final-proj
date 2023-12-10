@@ -50,22 +50,22 @@ public class ManufacturingEnterprise extends Enterprise{
         fp1.setName("fp1");
 //        recipe 1
         Recipe r1 = new Recipe();
-        r1.setQuantity(5);
+//        r1.setQuantity(5);
 //        raw product 1
         RawProduct rp1 = new RawProduct();
         rp1.setName("rp1");
         
-        r1.setRawProductId(rp1.getId());
+//        r1.setRawProductId(rp1.getId());
 //        recipe 2
         Recipe r2 = new Recipe();
-        r2.setQuantity(14);
+//        r2.setQuantity(14);
 //        raw product 2
         RawProduct rp2 = new RawProduct();
         rp2.setName("rp2");
-        r2.setRawProductId(rp2.getId());
+//        r2.setRawProductId(rp2.getId());
         
-        fp1.getRecipeList().add(r1);
-        fp1.getRecipeList().add(r2);
+//        fp1.getRecipeList().add(r1);
+//        fp1.getRecipeList().add(r2);
         finalProductList.add(fp1);
         inventory.put(fp1.getId(), 10);
 //   -------------------------------------------
@@ -73,19 +73,19 @@ public class ManufacturingEnterprise extends Enterprise{
         fp2.setName("fp2");
 //        recipe 3
         Recipe r3 = new Recipe();
-        r3.setQuantity(10);
-        r3.setRawProductId(rp2.getId());
+//        r3.setQuantity(10);
+//        r3.setRawProductId(rp2.getId());
         
-        fp2.getRecipeList().add(r3);  
+//        fp2.getRecipeList().add(r3);  
         finalProductList.add(fp2);
         inventory.put(fp2.getId(), 20);
 
 //   ----------------------------------------------     
         FinalProduct fp3 = new FinalProduct();
         Recipe r4 = new Recipe();
-        r4.setRawProductId(rp1.getId());
-        r4.setQuantity(14);
-        fp3.getRecipeList().add(r4);
+//        r4.setRawProductId(rp1.getId());
+//        r4.setQuantity(14);
+//        fp3.getRecipeList().add(r4);
         fp3.setName("fp13");
         finalProductList.add(fp3);
         inventory.put(fp3.getId(), 30);
