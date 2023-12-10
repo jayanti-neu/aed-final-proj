@@ -4,6 +4,7 @@
  */
 package business.Role;
 
+import business.Business.Business;
 import business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -17,7 +18,7 @@ import ui.SupplierRole.SupplierSupplyProductJPanel;
  * @author jayanti
  */
 public class Role {
-    public void openRolesWorkPage(JPanel workAreaPanel,UserAccount userAccount){
+    public void openRolesWorkPage(JPanel workAreaPanel,UserAccount userAccount, Business business){
         if (this instanceof RetailerRole){
             RetailerOrderProductJPanel ropjp = new RetailerOrderProductJPanel(workAreaPanel, userAccount);
             CardLayout layout = (CardLayout) workAreaPanel.getLayout();

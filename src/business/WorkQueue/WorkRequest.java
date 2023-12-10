@@ -5,6 +5,7 @@
 package business.WorkQueue;
 
 import business.Enterprise.Enterprise;
+import business.Enterprise.EnterpriseDirectory;
 import business.Organisation.Organisation;
 import business.UserAccount.UserAccount;
 import java.time.LocalDateTime;
@@ -18,8 +19,8 @@ public class WorkRequest {
     UserAccount assigned;
     
     String status;
-    Enterprise forEnterprise;
-    Enterprise fromEnterprise;
+//    Enterprise forEnterprise;
+//    EnterpriseDirectory fromEnterprise;
     
     int productId;
     int quantity;
@@ -97,21 +98,21 @@ public class WorkRequest {
         this.status = status;
     }
 
-    public Enterprise getForEnterprise() {
-        return forEnterprise;
-    }
-
-    public void setForEnterprise(Enterprise forEnterprise) {
-        this.forEnterprise = forEnterprise;
-    }
-
-    public Enterprise getFromEnterprise() {
-        return fromEnterprise;
-    }
-
-    public void setFromEnterprise(Enterprise fromEnterprise) {
-        this.fromEnterprise = fromEnterprise;
-    }
+//    public EnterpriseDirectory getForEnterprise() {
+//        return forEnterprise;
+//    }
+//
+//    public void setForEnterprise(EnterpriseDirectory forEnterprise) {
+//        this.forEnterprise = forEnterprise;
+//    }
+//
+//    public EnterpriseDirectory getFromEnterprise() {
+//        return fromEnterprise;
+//    }
+//
+//    public void setFromEnterprise(EnterpriseDirectory fromEnterprise) {
+//        this.fromEnterprise = fromEnterprise;
+//    }
 
 
     

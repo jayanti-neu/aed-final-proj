@@ -4,6 +4,7 @@
  */
 package business.Organisation;
 
+import business.Enterprise.Enterprise;
 import business.Role.ManufactureAdminRole;
 import business.UserAccount.UserAccount;
 
@@ -12,17 +13,19 @@ import business.UserAccount.UserAccount;
  * @author jayanti
  */
 public class ManufactureAdminOrganisation extends Organisation{
-        public ManufactureAdminOrganisation(){
+        public ManufactureAdminOrganisation(Enterprise enterprise){
+            super(enterprise);
         addRoles();
-        addUserAccount();
+//        addUserAccount();
     }
     public void addRoles(){
         getListOfRoles().add(new ManufactureAdminRole());
     }
-    public void addUserAccount(){
+    
+    public void addUserAccount(String userName,String password){
         UserAccount user = this.getUserAccountDirectory().addUserAccount();
-        user.setUsername("MAdmin");
-        user.setPassword("1234");
+        user.setUsername(userName);
+        user.setPassword(password);
         user.setOrganisation(this);
         user.setRole(getListOfRoles().get(0));
     }

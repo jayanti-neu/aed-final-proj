@@ -22,6 +22,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         this.business = ConfigueBusiness.configure();
         setUpLoginScreen();
+        setSize(700, 600);
     }
     
     public void setUpLoginScreen(){

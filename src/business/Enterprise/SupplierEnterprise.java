@@ -13,12 +13,18 @@ import java.util.Map;
  *
  * @author jayanti
  */
-public class SupplierEnterprise extends Enterprise{
+public class SupplierEnterprise extends Enterprise {
+
+//    String sid;
+    private static int countS = 1;
     ArrayList<FinalProduct> finalProductList;
     Map<Integer, Integer> inventory; //productId, quantity
-    public SupplierEnterprise(){
+
+    public SupplierEnterprise() {
+        id = "S" + countS;
+        countS++;
+        type = "supplier";
         this.organisationDirectory.addOrganisation(new SupplierOrganisation());
     }
-    
-    
+
 }

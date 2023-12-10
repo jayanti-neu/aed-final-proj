@@ -4,10 +4,14 @@
  */
 package business.Organisation;
 
+import business.Enterprise.Enterprise;
+
 /**
  *
  * @author jayanti
  */
 public class ManufacturePackerOrganisation extends Organisation{
-    
+    public ManufacturePackerOrganisation(Enterprise enterprise){
+        super(enterprise);
+    }
 }

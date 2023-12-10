@@ -5,10 +5,15 @@
 package ui.RetailerRole;
 
 import business.Business.Business;
+import business.Enterprise.Enterprise;
+import business.Enterprise.ManufacturingEnterprise;
+import business.Enterprise.ManufacturingEnterpriseDirectory;
 import business.Enterprise.RetailerEnterprise;
+import business.Organisation.RetailerOrganisation;
 import business.UserAccount.UserAccount;
 import business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -33,7 +38,7 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
         this.workJPanel = workJpanel;
 //        this.business = retailerEnterprise.getBusiness();
         this.business = Business.getInstance();
-        this.retailerEnterprise = this.business.getRetailerEnterprise();
+//        this.retailerEnterprise = this.business.getRetailerEnterprise();
         populateTable();
     }
 
@@ -156,8 +161,18 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
         currentWorkRequest.setProductId(productId);
         currentWorkRequest.setQuantity(quantityRequested);
         currentWorkRequest.setSender(userAccount);
-        currentWorkRequest.setFromEnterprise(retailerEnterprise);
-        currentWorkRequest.setForEnterprise(this.business.getManufacturingEnterprise());
+        System.out.println(userAccount.getOrganisation().getEnterprise());
+//        currentWorkRequest.setFromEnterprise(userAccount.getOrganisation().getEnterprise());
+//        ManufacturingEnterpriseDirectory med = this.business.getManufacturingEnterprise();
+//        ArrayList<Enterprise> ae = med.getEnterpriseList();
+//        for (Enterprise e: ae){
+//            ManufacturingEnterprise mfe = (ManufacturingEnterprise) e;
+//            current
+//        }
+//        for (ManufacturingEnterprise m : (ManufacturingEnterprise)this.business.getManufacturingEnterprise().getEnterpriseList()){
+//            
+//        }
+//        currentWorkRequest.setForEnterprise(this.business.getManufacturingEnterprise());
         populateTable();
         JOptionPane.showMessageDialog(null, "Order sent");
         
@@ -169,7 +184,7 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
         System.out.println("here");
         DefaultTableModel table1 = (DefaultTableModel)jTable2.getModel();
         for(WorkRequest wr : this.business.getGlobalWorkQueue().getListOfRequests()){
-            if (wr.getFromEnterprise().equals(this.business.getRetailerEnterprise())){
+            if (userAccount.equals(wr.getSender())) {
                 Object row[] = new Object[4];
                 row[0] = wr.getProductId();
                 row[1] = wr.getQuantity();

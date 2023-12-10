@@ -7,6 +7,7 @@ package ui.ManufacturingAdminRole;
 import business.Business.Business;
 import business.Enterprise.Enterprise;
 import business.Enterprise.ManufacturingEnterprise;
+import business.Enterprise.RetailerEnterprise;
 import business.Organisation.Organisation;
 import business.Product.FinalProduct;
 import business.UserAccount.UserAccount;
@@ -42,7 +43,7 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
         this.userAccount = userAccount;
         this.business = Business.getInstance();
         this.wq = this.business.getGlobalWorkQueue();
-        this.enterprise = business.getManufacturingEnterprise();
+//        this.enterprise = business.getManufacturingEnterprise();
         populateTable();
         addEventListener();
         jButton4.setVisible(false);
@@ -56,7 +57,7 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
        DefaultTableModel requested = (DefaultTableModel) jTable2.getModel();
         requested.setRowCount(0);
         for (WorkRequest wr: wq.getListOfRequests()){
-            if (wr.getFromEnterprise().equals(this.business.getRetailerEnterprise())){
+            if ("retailer".equals(wr.getSender().getOrganisation().getEnterprise().getType())){
                 int waitingforid = wr.getWaitingForId();
                 String status = this.business.getGlobalWorkQueue().findWorkRequest(waitingforid).getStatus(); 
                 if ("Approved".equals(status)){
@@ -73,12 +74,16 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
                 jTable2.removeAll();
         DefaultTableModel requested = (DefaultTableModel) jTable2.getModel();
         for (WorkRequest wr: wq.getListOfRequests()){
-            if (wr.getFromEnterprise().equals(this.business.getRetailerEnterprise())){
+            Enterprise wrEnterprise = wr.getSender().getOrganisation().getEnterprise();
+            if ("retailer".equals(wrEnterprise.getType())){
                 Object[] row = new Object[6];
                 row[0] = wr.getId();
-                row[1] = this.enterprise.findProduct(wr.getProductId());
+                ManufacturingEnterprise meUser = (ManufacturingEnterprise)userAccount.getOrganisation().getEnterprise();
+                System.out.println("----------------------->" + meUser);
+                row[1] = meUser.findProduct(wr.getProductId());
+                System.out.println("----------------------->" + wr.getProductId());
                 row[2] = wr.getQuantity();
-                row[3] = this.enterprise.getInventory().get(wr.getProductId());
+                row[3] = meUser.getInventory().get(wr.getProductId());
                 row[4] = wr.getDateOfRequest();
                 row[5] = wr.getStatus();
                 requested.addRow(row);
@@ -115,9 +120,8 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
         
         WorkRequest wr = this.business.getGlobalWorkQueue().addWorkRequest();
         wr.setQuantity(amt);
-        wr.setFromEnterprise(enterprise);
-        wr.setForEnterprise(this.business.getSupplierEnterprise());
-        wr.setStatus("From Supplier");
+        wr.setSender(userAccount);
+        wr.setStatus("Request for Supplier");
         wr.setProductId(fp.getId());
         return wr.getId();
     }

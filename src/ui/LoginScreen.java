@@ -6,11 +6,15 @@ package ui;
 
 import business.Business.Business;
 import business.Enterprise.Enterprise;
+import business.Enterprise.EnterpriseDirectory;
 import business.Enterprise.RetailerEnterprise;
 import business.Organisation.Organisation;
 import business.Role.Role;
 import business.UserAccount.UserAccount;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
+import ui.AdministrativeRole.AdminWorkAreaJPanel;
+import ui.AdministrativeRole.ManageRetailerJPanel;
 import ui.RetailerRole.RetailerOrderProductJPanel;
 
 /**
@@ -24,11 +28,12 @@ public class LoginScreen extends javax.swing.JPanel {
      */
     Business business;
     JPanel workAreaPanel;
+
     public LoginScreen(JPanel workAreaPanel, Business business) {
         initComponents();
         this.workAreaPanel = workAreaPanel;
         this.business = business;
-        
+
     }
 
     /**
@@ -108,20 +113,30 @@ public class LoginScreen extends javax.swing.JPanel {
         // TODO add your handling code here:
         String username = jTextField1.getText();
         String password = jTextField2.getText();
+        if (username.equals("a") && password.equals("a")) {
+            AdminWorkAreaJPanel adminWorkAreaJPanel = new AdminWorkAreaJPanel(business, workAreaPanel);
+            workAreaPanel.add("AdminWorkAreaJPanel", adminWorkAreaJPanel);
+            CardLayout layout = (CardLayout) workAreaPanel.getLayout();
+            layout.next(workAreaPanel);
+            return;
+        }
         UserAccount userAccount = null;
-        for (Enterprise enterprise : business.getEnterprisesInvolved()){
-            for (Organisation org: enterprise.getOrganisationDirectory().getOrganisationList()){
-                for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()){
-                    if (username.equals(ua.getUsername()) && password.equals(ua.getPassword())){
+        for (EnterpriseDirectory enterpriseDirectory : business.getEnterprisesInvolved()) {
+            for(Enterprise enterprise: enterpriseDirectory.getEnterpriseList()) {
+                for (Organisation org : enterprise.getOrganisationDirectory().getOrganisationList()) {
+                    System.out.println(org);
+                for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
+                    if (username.equals(ua.getUsername())) {
                         userAccount = ua;
                         break;
                     }
                 }
             }
+            }
         }
-        if (userAccount != null){
+        if (userAccount != null) {
             Role role = userAccount.getRole();
-            role.openRolesWorkPage(workAreaPanel, userAccount);
+            role.openRolesWorkPage(workAreaPanel, userAccount, business);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
