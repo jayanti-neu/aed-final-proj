@@ -11,8 +11,13 @@ import business.Organisation.RetailerOrganisation;
  * @author jayanti
  */
 public class RetailerEnterprise extends Enterprise{
+//    String rid;
+    private static int countR = 1;
     
     public RetailerEnterprise(){
-        this.getOrganisationDirectory().addOrganisation(new RetailerOrganisation());
+        id = "R"+countR;
+        countR++;
+        setType("retailer");
+        this.getOrganisationDirectory().addOrganisation(new RetailerOrganisation(this));
     }
 }

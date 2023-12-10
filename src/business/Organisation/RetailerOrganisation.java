@@ -4,6 +4,7 @@
  */
 package business.Organisation;
 
+import business.Enterprise.Enterprise;
 import business.Role.RetailerRole;
 import business.UserAccount.UserAccount;
 
@@ -13,17 +14,17 @@ import business.UserAccount.UserAccount;
  */
 public class RetailerOrganisation extends Organisation{
     
-    public RetailerOrganisation(){
+    public RetailerOrganisation(Enterprise enterprise){
+        super(enterprise);
         addRoles();
-        addUserAccount();
     }
     public void addRoles(){
         getListOfRoles().add(new RetailerRole());
     }
-    public void addUserAccount(){
+    public void addUserAccount(String name, String password){
         UserAccount user = this.getUserAccountDirectory().addUserAccount();
-        user.setUsername("retailer");
-        user.setPassword("1234");
+        user.setUsername(name);
+        user.setPassword(password);
         user.setOrganisation(this);
         user.setRole(getListOfRoles().get(0));
     }

@@ -14,23 +14,27 @@ import java.util.ArrayList;
  * @author jayanti
  */
 public class Organisation {
-    int id;
+    String orgId;
     String name;
     ArrayList<Role> listOfRoles;
     Enterprise enterprise;
     UserAccountDirectory userAccountDirectory;
     
-    public Organisation(){
+    private static int countOrg = 1;
+    public Organisation(Enterprise enterprise){
+        orgId = "Org"+countOrg;
+        countOrg++;
         userAccountDirectory = new UserAccountDirectory();
         listOfRoles = new ArrayList<>();
+        this.enterprise = enterprise;
     }
 
-    public int getId() {
-        return id;
+    public String getOrgId() {
+        return orgId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setOrgId(String OrgId) {
+        this.orgId = OrgId;
     }
 
     public String getName() {

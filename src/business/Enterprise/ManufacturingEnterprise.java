@@ -4,6 +4,7 @@
  */
 package business.Enterprise;
 
+import business.Business.Business;
 import business.Organisation.ManufactureAdminOrganisation;
 import business.Organisation.ManufacturePackerOrganisation;
 import business.Organisation.ManufactureProcessorOrganisation;
@@ -19,23 +20,35 @@ import java.util.Map;
  * @author jayanti
  */
 public class ManufacturingEnterprise extends Enterprise{
+//    String mid;
     ArrayList<FinalProduct> finalProductList;
     Map<Integer, Integer> inventory; //productId, quantity
     Map<Integer, ArrayList<Integer>> recipe; //finalProductId, listOfRawProductsNeededToMakeRawProduct
 //    ArrayList<Recipe>
     ArrayList<RawProduct> rawProductList;
     
+    private static int countM = 1;
+    
     public ManufacturingEnterprise(){
-        this.organisationDirectory.addOrganisation(new ManufactureAdminOrganisation());
-        this.organisationDirectory.addOrganisation(new ManufactureProcessorOrganisation());
-        this.organisationDirectory.addOrganisation(new ManufacturePackerOrganisation());
-        finalProductList = new ArrayList<>();
+        id = "M"+countM;
+        countM++;
+//        this.enterpriseDirectory = ;
+        this.organisationDirectory.addOrganisation(new ManufactureAdminOrganisation(this));
+        this.organisationDirectory.addOrganisation(new ManufactureProcessorOrganisation(this));
+        this.organisationDirectory.addOrganisation(new ManufacturePackerOrganisation(this));
+        finalProductList = Business.getInstance().getListOfProductsThisBusinessSells();
         rawProductList = new ArrayList<>();
         inventory = new HashMap<>();
         recipe = new HashMap<>();
-        createFinalProductList();
+//        createFinalProductList();
+        createInventory();
+        setType("manufacturing");
     }
-    
+    public void createInventory(){
+        for (FinalProduct fp : finalProductList){
+            inventory.put(fp.getId(), 20); //Change inventory quantity rand 
+        }
+    }
     public FinalProduct findProduct(int id){
         for (FinalProduct fp: finalProductList){
             if (fp.getId() == id){

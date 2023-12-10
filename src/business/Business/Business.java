@@ -4,10 +4,10 @@
  */
 package business.Business;
 
-import business.Enterprise.Enterprise;
-import business.Enterprise.ManufacturingEnterprise;
-import business.Enterprise.RetailerEnterprise;
-import business.Enterprise.SupplierEnterprise;
+import business.Enterprise.EnterpriseDirectory;
+import business.Enterprise.ManufacturingEnterpriseDirectory;
+import business.Enterprise.RetailerEnterpriseDirectory;
+import business.Enterprise.SupplierEnterpriseDirectory;
 import business.Product.FinalProduct;
 import business.WorkQueue.WorkQueue;
 import java.util.ArrayList;
@@ -20,13 +20,35 @@ public class Business {
     String name;
     static Business business;
     WorkQueue globalWorkQueue;
-    ArrayList<Enterprise> enterprisesInvolved;
     ArrayList<FinalProduct> productsSoldByBusiness;
+    ArrayList<EnterpriseDirectory> enterprisesInvolved;
 //    ArrayLi
-    
+    ArrayList<FinalProduct> listOfProductsThisBusinessSells;
     public Business(){
         globalWorkQueue = new WorkQueue();
         enterprisesInvolved = new ArrayList<>();
+        listOfProductsThisBusinessSells = new ArrayList<>();
+        createListOfFinalProducts();
+    }
+    
+    private void createListOfFinalProducts(){
+        FinalProduct fp1 = new FinalProduct();
+        fp1.setName("fp1");
+        listOfProductsThisBusinessSells.add(fp1);
+        FinalProduct fp2 = new FinalProduct();
+        fp2.setName("fp2"); 
+        listOfProductsThisBusinessSells.add(fp2);
+        FinalProduct fp3 = new FinalProduct();      
+        fp3.setName("fp13");
+        listOfProductsThisBusinessSells.add(fp3);
+    }
+
+    public ArrayList<FinalProduct> getListOfProductsThisBusinessSells() {
+        return listOfProductsThisBusinessSells;
+    }
+
+    public void setListOfProductsThisBusinessSells(ArrayList<FinalProduct> listOfProductsThisBusinessSells) {
+        this.listOfProductsThisBusinessSells = listOfProductsThisBusinessSells;
     }
     
     public static Business getInstance(){
@@ -62,24 +84,25 @@ public class Business {
         Business.business = business;
     }
 
-    public ArrayList<Enterprise> getEnterprisesInvolved() {
+    public ArrayList<EnterpriseDirectory> getEnterprisesInvolved() {
         return enterprisesInvolved;
     }
 
-    public void setEnterprisesInvolved(ArrayList<Enterprise> enterprisesInvolved) {
+    public void setEnterprisesInvolved(ArrayList<EnterpriseDirectory> enterprisesInvolved) {
         this.enterprisesInvolved = enterprisesInvolved;
     }
     
-    public RetailerEnterprise getRetailerEnterprise(){
-        return (RetailerEnterprise)this.enterprisesInvolved.get(0);
+    public RetailerEnterpriseDirectory getRetailerEnterprise(){
+//        return (RetailerEnterprise)this.enterprisesInvolved.get();
+        return (RetailerEnterpriseDirectory)this.enterprisesInvolved.get(0);
     }
     
-    public ManufacturingEnterprise getManufacturingEnterprise(){
-        return (ManufacturingEnterprise)this.enterprisesInvolved.get(1);
+    public ManufacturingEnterpriseDirectory getManufacturingEnterprise(){
+        return (ManufacturingEnterpriseDirectory)this.enterprisesInvolved.get(1);
 
     }
     
-    public SupplierEnterprise getSupplierEnterprise(){
-        return (SupplierEnterprise) this.enterprisesInvolved.get(2);
+    public SupplierEnterpriseDirectory getSupplierEnterprise(int id){
+        return (SupplierEnterpriseDirectory) this.enterprisesInvolved.get(2);
     }
 }
