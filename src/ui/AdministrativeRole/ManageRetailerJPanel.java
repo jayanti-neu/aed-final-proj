@@ -52,6 +52,8 @@ public class ManageRetailerJPanel extends javax.swing.JPanel {
         tblRetailer = new javax.swing.JTable();
         lblEmployeeList = new javax.swing.JLabel();
         lblOrganizationList1 = new javax.swing.JLabel();
+        lblEmployeeName1 = new javax.swing.JLabel();
+        txtRetailerPassword = new javax.swing.JTextField();
 
         lblEmployeeName.setText("Name:");
 
@@ -106,28 +108,35 @@ public class ManageRetailerJPanel extends javax.swing.JPanel {
         lblOrganizationList1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblOrganizationList1.setText("New Retailer");
 
+        lblEmployeeName1.setText("Password");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEmployeeList)
-                    .addComponent(lblOrganizationList1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblEmployeeName)
-                        .addGap(30, 30, 30)
+                        .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtRetailerName, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEmployeeList)
+                            .addComponent(lblOrganizationList1)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(btnCreateEmployee))))
+                                .addComponent(lblEmployeeName)
+                                .addGap(30, 30, 30)
+                                .addComponent(txtRetailerName, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBack)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblTitle))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblEmployeeName1)
+                                .addGap(30, 30, 30)
+                                .addComponent(txtRetailerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBack)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblTitle)))
+                        .addGap(126, 126, 126)
+                        .addComponent(btnCreateEmployee)))
                 .addContainerGap(205, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -147,16 +156,20 @@ public class ManageRetailerJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRetailerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEmployeeName))
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtRetailerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmployeeName1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addComponent(btnCreateEmployee)
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addGap(40, 40, 40))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateEmployeeActionPerformed
 
         String name = txtRetailerName.getText();
-        String password = txtRetailerName.getText();
+        String password = txtRetailerPassword.getText();
 
         if (name.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Retailer name cannot be empty.", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -165,6 +178,7 @@ public class ManageRetailerJPanel extends javax.swing.JPanel {
 
         retailerEnterpriseDirectory.createRetailerEnterprise(name, password);
         txtRetailerName.setText("");
+        txtRetailerPassword.setText("");
         populateTable();
     }//GEN-LAST:event_btnCreateEmployeeActionPerformed
 
@@ -196,9 +210,11 @@ public class ManageRetailerJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblEmployeeList;
     private javax.swing.JLabel lblEmployeeName;
+    private javax.swing.JLabel lblEmployeeName1;
     private javax.swing.JLabel lblOrganizationList1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblRetailer;
     private javax.swing.JTextField txtRetailerName;
+    private javax.swing.JTextField txtRetailerPassword;
     // End of variables declaration//GEN-END:variables
 }

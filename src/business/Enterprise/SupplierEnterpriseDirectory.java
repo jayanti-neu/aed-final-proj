@@ -4,6 +4,8 @@
  */
 package business.Enterprise;
 
+import business.Organisation.ManufactureAdminOrganisation;
+import business.Organisation.SupplierOrganisation;
 import java.util.ArrayList;
 
 /**
@@ -12,9 +14,10 @@ import java.util.ArrayList;
  */
 public class SupplierEnterpriseDirectory extends EnterpriseDirectory{
 
-        public SupplierEnterprise createSupplierEnterprise(String name) {
+        public SupplierEnterprise createSupplierEnterprise(String name, String password) {
             SupplierEnterprise supplierEnterprise = new SupplierEnterprise();
-            supplierEnterprise.setName(name);
+            SupplierOrganisation ma = (SupplierOrganisation)supplierEnterprise.getOrganisationDirectory().getOrganisationList().get(0);
+            ma.addUserAccount(name, password);
             enterpriseList.add(supplierEnterprise);
             return supplierEnterprise;
         }

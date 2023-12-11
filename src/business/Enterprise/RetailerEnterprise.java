@@ -5,6 +5,7 @@
 package business.Enterprise;
 
 import business.Organisation.RetailerOrganisation;
+import business.Product.FinalProduct;
 
 /**
  *

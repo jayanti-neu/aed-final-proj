@@ -102,7 +102,7 @@ public class Business {
 
     }
     
-    public SupplierEnterpriseDirectory getSupplierEnterprise(int id){
+    public SupplierEnterpriseDirectory getSupplierEnterprise(){
         return (SupplierEnterpriseDirectory) this.enterprisesInvolved.get(2);
     }
 }

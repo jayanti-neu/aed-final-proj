@@ -43,7 +43,7 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
         this.userAccount = userAccount;
         this.business = Business.getInstance();
         this.wq = this.business.getGlobalWorkQueue();
-//        this.enterprise = business.getManufacturingEnterprise();
+        this.enterprise = (ManufacturingEnterprise)userAccount.getOrganisation().getEnterprise();
         populateTable();
         addEventListener();
         jButton4.setVisible(false);
@@ -72,8 +72,8 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
         } 
     }
     public void populateTable(){
-                jTable2.removeAll();
         DefaultTableModel requested = (DefaultTableModel) jTable2.getModel();
+        requested.setRowCount(0);
         for (WorkRequest wr: wq.getListOfRequests()){
             Enterprise wrEnterprise = wr.getSender().getOrganisation().getEnterprise();
             if ("retailer".equals(wrEnterprise.getType())){
@@ -123,7 +123,7 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
         wr.setQuantity(amt);
         wr.setSender(userAccount);
         wr.setStatus("Request for Supplier");
-        wr.setProductId(fp.getId());
+//        wr.setProductId(fp.getId());
         return wr.getId();
     }
 
@@ -318,7 +318,8 @@ public class AdminAssignWorkJPanel extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        updateIncomingRequestTable();
+//        updateIncomingRequestTable();
+populateTable();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

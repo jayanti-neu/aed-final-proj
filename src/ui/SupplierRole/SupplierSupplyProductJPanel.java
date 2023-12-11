@@ -5,7 +5,10 @@
 package ui.SupplierRole;
 
 import business.Business.Business;
+import business.Enterprise.Enterprise;
+import business.Enterprise.SupplierEnterprise;
 import business.UserAccount.UserAccount;
+import business.WorkQueue.WorkQueue;
 import business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -20,33 +23,43 @@ public class SupplierSupplyProductJPanel extends javax.swing.JPanel {
     /**
      * Creates new form SupplierSupplyProductJPanel
      */
-    
     Business business;
+    WorkQueue wq;
     JPanel workJPanel;
+    UserAccount userAccount;
 
     public SupplierSupplyProductJPanel(JPanel workAreaPanel, UserAccount userAccount) {
+        this.userAccount = userAccount;
         this.business = Business.getInstance();
         this.workJPanel = workAreaPanel;
+        this.wq = this.business.getGlobalWorkQueue();
         initComponents();
-        populateTable();    
+        populateTable();
     }
-    
-        public void populateTable(){
+
+    public void populateTable() {
         jTable2.removeAll();
-        DefaultTableModel table1 = (DefaultTableModel)jTable2.getModel();
-        for(WorkRequest wr : this.business.getGlobalWorkQueue().getListOfRequests()){
-            System.out.println("-----wr----"+wr);
-            if (wr.getFromEnterprise().equals(this.business.getManufacturingEnterprise())){
-                Object row[] = new Object[5];
+        DefaultTableModel table1 = (DefaultTableModel) jTable2.getModel();
+        table1.setRowCount(0);
+        for (WorkRequest wr : wq.getListOfRequests()) {
+            Enterprise wrEnterprise = wr.getSender().getOrganisation().getEnterprise();
+            System.out.println("---typeeeeee---"+ wrEnterprise.getType());
+            if ("manufacturer".equals(wrEnterprise.getType())) {
+                Object[] row = new Object[6];
                 row[0] = wr.getId();
-                row[1] = wr.getProductId();
+                SupplierEnterprise seUser = (SupplierEnterprise) userAccount.getOrganisation().getEnterprise();
+                System.out.println("----------------------->" + seUser);
+                row[1] = seUser.findProduct(wr.getProductId());
+                System.out.println("----------------------->" + wr.getProductId());
                 row[2] = wr.getQuantity();
+//                row[3] = seUser.getInventory().get(wr.getProductId());
                 row[3] = wr.getDateOfRequest();
                 row[4] = wr.getStatus();
                 table1.addRow(row);
             }
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -132,10 +145,11 @@ public class SupplierSupplyProductJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        WorkRequest wr = this.business.getGlobalWorkQueue().findWorkRequest((int)jTable2.getValueAt(jTable2.getSelectedRow(), 0));
+        WorkRequest wr = this.business.getGlobalWorkQueue().findWorkRequest((int) jTable2.getValueAt(jTable2.getSelectedRow(), 0));
         wr.setStatus("Approved");
         int reqQty = wr.getQuantity();
         wr.setQuantity(reqQty + 5);
+        populateTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

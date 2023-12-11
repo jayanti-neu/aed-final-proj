@@ -4,6 +4,7 @@
  */
 package business.Organisation;
 
+import business.Enterprise.Enterprise;
 import business.Role.SupplierRole;
 import business.UserAccount.UserAccount;
 
@@ -12,17 +13,17 @@ import business.UserAccount.UserAccount;
  * @author jayanti
  */
 public class SupplierOrganisation extends Organisation{
-        public SupplierOrganisation(){
+        public SupplierOrganisation(Enterprise enterprise){
+                        super(enterprise);
         addRoles();
-        addUserAccount();
     }
     public void addRoles(){
         getListOfRoles().add(new SupplierRole());
     } 
-    public void addUserAccount(){
+    public void addUserAccount(String name, String password){
         UserAccount user = this.getUserAccountDirectory().addUserAccount();
-        user.setUsername("supplier");
-        user.setPassword("1234");
+        user.setUsername(name);
+        user.setPassword(password);
         user.setOrganisation(this);
         user.setRole(getListOfRoles().get(0));
     }    

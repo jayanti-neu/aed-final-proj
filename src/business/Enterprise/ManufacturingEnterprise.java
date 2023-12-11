@@ -42,7 +42,7 @@ public class ManufacturingEnterprise extends Enterprise{
         recipe = new HashMap<>();
 //        createFinalProductList();
         createInventory();
-        setType("manufacturing");
+        setType("manufacturer");
     }
     public void createInventory(){
         for (FinalProduct fp : finalProductList){

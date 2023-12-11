@@ -68,7 +68,13 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("Name:");
+        jLabel1.setText("Product name:");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Quantity:");
 
@@ -122,7 +128,7 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 816, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -154,11 +160,12 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         // TODO add your handling code here:
-        int productId = Integer.valueOf(jTextField1.getText());
+        String name = jTextField1.getText();
         int quantityRequested = Integer.valueOf(jTextField2.getText());
         this.currentWorkRequest = business.getGlobalWorkQueue().addWorkRequest();
         currentWorkRequest.setStatus("Requested Product from Manufacturer");
-        currentWorkRequest.setProductId(productId);
+        currentWorkRequest.setProductId();
+        currentWorkRequest.setProductName(name);
         currentWorkRequest.setQuantity(quantityRequested);
         currentWorkRequest.setSender(userAccount);
         System.out.println(userAccount.getOrganisation().getEnterprise());
@@ -180,9 +187,8 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnOrderActionPerformed
 
     public void populateTable(){
-        jTable2.removeAll();
-        System.out.println("here");
         DefaultTableModel table1 = (DefaultTableModel)jTable2.getModel();
+        table1.setRowCount(0);
         for(WorkRequest wr : this.business.getGlobalWorkQueue().getListOfRequests()){
             if (userAccount.equals(wr.getSender())) {
                 Object row[] = new Object[4];
@@ -201,6 +207,10 @@ public class RetailerOrderProductJPanel extends javax.swing.JPanel {
         this.workJPanel.remove(this);
         layout.previous(this.workJPanel);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

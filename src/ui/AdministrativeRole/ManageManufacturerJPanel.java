@@ -32,6 +32,7 @@ public class ManageManufacturerJPanel extends javax.swing.JPanel {
         initComponents();
         this.manufacturingEnterpriseDirectory = business.getManufacturingEnterprise();
         this.userProcessContainer = userProcessContainer;
+        populateTable();
     }
 
     /**
@@ -49,7 +50,7 @@ public class ManageManufacturerJPanel extends javax.swing.JPanel {
         lblOrganizationList1 = new javax.swing.JLabel();
         lblEmployeeName = new javax.swing.JLabel();
         txtManufacturerName = new javax.swing.JTextField();
-        btnCreateEmployee = new javax.swing.JButton();
+        btnCreateManufacturer = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         lblEmployeeName1 = new javax.swing.JLabel();
@@ -91,10 +92,10 @@ public class ManageManufacturerJPanel extends javax.swing.JPanel {
 
         lblEmployeeName.setText("Name:");
 
-        btnCreateEmployee.setText("Create Manufacturer");
-        btnCreateEmployee.addActionListener(new java.awt.event.ActionListener() {
+        btnCreateManufacturer.setText("Create Manufacturer");
+        btnCreateManufacturer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreateEmployeeActionPerformed(evt);
+                btnCreateManufacturerActionPerformed(evt);
             }
         });
 
@@ -138,7 +139,7 @@ public class ManageManufacturerJPanel extends javax.swing.JPanel {
                                     .addComponent(txtManufacturerName, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(122, 122, 122)
-                        .addComponent(btnCreateEmployee)))
+                        .addComponent(btnCreateManufacturer)))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -163,12 +164,12 @@ public class ManageManufacturerJPanel extends javax.swing.JPanel {
                     .addComponent(txtManufacturerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEmployeeName1))
                 .addGap(18, 18, 18)
-                .addComponent(btnCreateEmployee)
+                .addComponent(btnCreateManufacturer)
                 .addGap(31, 31, 31))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCreateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateEmployeeActionPerformed
+    private void btnCreateManufacturerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateManufacturerActionPerformed
 
         String name = txtManufacturerName.getText();
         String password = txtManufacturerPassword.getText();
@@ -180,11 +181,12 @@ public class ManageManufacturerJPanel extends javax.swing.JPanel {
 
         manufacturingEnterpriseDirectory.createManufacturingEnterprise(name, password);
         txtManufacturerName.setText("");
-        populateTable(manufacturingEnterpriseDirectory);
+        txtManufacturerPassword.setText("");
+        populateTable();
 
-    }//GEN-LAST:event_btnCreateEmployeeActionPerformed
+    }//GEN-LAST:event_btnCreateManufacturerActionPerformed
 
-        private void populateTable(ManufacturingEnterpriseDirectory manufacturingEnterpriseDirectory){
+        private void populateTable(){
         DefaultTableModel model = (DefaultTableModel) tblManufacturer.getModel();
         
         model.setRowCount(0);
@@ -208,7 +210,7 @@ public class ManageManufacturerJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnCreateEmployee;
+    private javax.swing.JButton btnCreateManufacturer;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblEmployeeList;
     private javax.swing.JLabel lblEmployeeName;

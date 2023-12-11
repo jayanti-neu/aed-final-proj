@@ -4,6 +4,17 @@
  */
 package ui.AdministrativeRole;
 
+import business.Business.Business;
+import business.Enterprise.Enterprise;
+import business.Enterprise.ManufacturingEnterprise;
+import business.Enterprise.ManufacturingEnterpriseDirectory;
+import business.Enterprise.SupplierEnterpriseDirectory;
+import business.Enterprise.SupplierEnterprise;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author eesitasen
@@ -13,8 +24,15 @@ public class ManageSupplierJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageSupplierJPanel
      */
-    public ManageSupplierJPanel() {
+    SupplierEnterpriseDirectory supplierEnterpriseDitrectory;
+    JPanel userProcessContainer;
+
+    public ManageSupplierJPanel(Business business, JPanel userProcessContainer) {
         initComponents();
+
+        this.supplierEnterpriseDitrectory = business.getSupplierEnterprise();
+        this.userProcessContainer = userProcessContainer;
+        populateTable();
     }
 
     /**
@@ -26,19 +44,180 @@ public class ManageSupplierJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnCreateSupplier = new javax.swing.JButton();
+        lblTitle = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
+        lblEmployeeName1 = new javax.swing.JLabel();
+        txtManufacturerPassword = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblSupplier = new javax.swing.JTable();
+        lblEmployeeList = new javax.swing.JLabel();
+        lblOrganizationList1 = new javax.swing.JLabel();
+        lblEmployeeName = new javax.swing.JLabel();
+        txtManufacturerName = new javax.swing.JTextField();
+
+        btnCreateSupplier.setText("Create Supplier");
+        btnCreateSupplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateSupplierActionPerformed(evt);
+            }
+        });
+
+        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        lblTitle.setText("Manage Supplier");
+
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        lblEmployeeName1.setText("Password");
+
+        tblSupplier.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ID", "Name"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblSupplier);
+
+        lblEmployeeList.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblEmployeeList.setText("Supplier List:");
+
+        lblOrganizationList1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblOrganizationList1.setText("New Supplier:");
+
+        lblEmployeeName.setText("Name:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEmployeeList)
+                            .addComponent(lblOrganizationList1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBack)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblTitle))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblEmployeeName1)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(txtManufacturerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addComponent(lblEmployeeName)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtManufacturerName, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addComponent(btnCreateSupplier)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBack)
+                    .addComponent(lblTitle))
+                .addGap(26, 26, 26)
+                .addComponent(lblEmployeeList)
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(lblOrganizationList1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtManufacturerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmployeeName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtManufacturerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmployeeName1))
+                .addGap(18, 18, 18)
+                .addComponent(btnCreateSupplier)
+                .addGap(31, 31, 31))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCreateSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateSupplierActionPerformed
+
+        String name = txtManufacturerName.getText();
+        String password = txtManufacturerPassword.getText();
+
+        if (name.isEmpty() && password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Supplier name cannot be empty.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        supplierEnterpriseDitrectory.createSupplierEnterprise(name, password);
+        txtManufacturerName.setText("");
+        txtManufacturerPassword.setText("");
+        populateTable();
+    }//GEN-LAST:event_btnCreateSupplierActionPerformed
+
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblSupplier.getModel();
+
+        model.setRowCount(0);
+
+        for (Enterprise enterprise : supplierEnterpriseDitrectory.getEnterpriseList()) {
+            SupplierEnterprise supplierEnterprise = (SupplierEnterprise) enterprise;
+            Object[] row = new Object[2];
+            row[0] = supplierEnterprise.getId();
+            row[1] = supplierEnterprise.getOrganisationDirectory().getOrganisationList().get(0).getUserAccountDirectory().getUserAccountList().get(0).getUsername();
+            model.addRow(row);
+        }
+    }
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnCreateSupplier;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblEmployeeList;
+    private javax.swing.JLabel lblEmployeeName;
+    private javax.swing.JLabel lblEmployeeName1;
+    private javax.swing.JLabel lblOrganizationList1;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JTable tblSupplier;
+    private javax.swing.JTextField txtManufacturerName;
+    private javax.swing.JTextField txtManufacturerPassword;
     // End of variables declaration//GEN-END:variables
 }

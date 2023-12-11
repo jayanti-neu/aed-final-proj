@@ -23,7 +23,18 @@ public class WorkRequest {
 //    EnterpriseDirectory fromEnterprise;
     
     int productId;
+    String productName;
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
     int quantity;
+    
+    public static int countP = 1;
     
     LocalDateTime dateOfRequest;
         static int count = 0;
@@ -62,8 +73,9 @@ public class WorkRequest {
         return productId;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setProductId() {
+        this.productId = countP;
+        countP++;
     }
 
     public int getQuantity() {
